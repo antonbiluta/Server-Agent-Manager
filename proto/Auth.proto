@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package auth.protocol;
+
+service ServerAdmin {
+    rpc GetServerInfo(AuthRequest) returns (AuthResponse);
+}
+
+message AuthRequest {
+    string token = 1;
+}
+
+message AuthResponse {
+    string name = 1;
+    string description = 2;
+    string status = 3;
+}
