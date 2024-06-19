@@ -1,1 +1,3 @@
 /target
+/src/auth.protocol.rs
+server_config.json
