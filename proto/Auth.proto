@@ -4,6 +4,10 @@ package auth.protocol;
 
 service ServerAdmin {
     rpc GetServerInfo(AuthRequest) returns (AuthResponse);
+    rpc GetCpuUsage (AuthRequest) returns (CpuUsageResponse);
+    rpc GetMemoryUsage (AuthRequest) returns (MemoryUsageResponse);
+    rpc GetDiskUsage (AuthRequest) returns (DiskUsageResponse);
+    rpc GetNetworkUsage (AuthRequest) returns (NetworkUsageResponse);
 }
 
 message AuthRequest {
@@ -14,4 +18,42 @@ message AuthResponse {
     string name = 1;
     string description = 2;
     string status = 3;
+}
+
+message CpuUsageResponse {
+    double cpu_usage = 1;
+    double cpu_usage_procent = 2;
+}
+
+message MemoryUsageResponse {
+    repeated MemoryUsage memoryUsage = 1;
+}
+
+message MemoryUsage {
+    uint64 total_memory = 1;
+    uint64 used_memory = 2;
+    uint64 free_memory = 3;
+    string digital_type = 4;
+}
+
+message DiskUsageResponse {
+    repeated DiskUsage disks = 1;
+}
+
+message DiskUsage {
+    string name = 1;
+    string file_system = 2;
+    string mount_point = 3;
+    uint64 total_space = 4;
+    uint64 available_space = 5;
+}
+
+message NetworkUsageResponse {
+    repeated NetworkUsage NetworkUsage = 1;
+}
+
+message NetworkUsage {
+    uint64 total_received = 1;
+    uint64 total_transmitted = 2;
+    string digital_type = 3;
 }
